@@ -1,58 +1,68 @@
-# Animated Borders – tacky-borders für KDE Plasma
+# Animated Borders – tacky-borders for KDE Plasma
 
-KWin-Script (QML) für Plasma 6. Es zeichnet einen animierten Farbverlauf-Rand um das aktive Fenster.
-Man muss nichts kompilieren, und das Script übersteht Plasma-Updates.
+A KWin script (QML) for Plasma 6 that draws an animated gradient border around the active window,
+inspired by [tacky-borders](https://github.com/lukeyou05/tacky-borders) on Windows.
+Nothing to compile, and it survives Plasma updates.
 
-## Installieren / Aktualisieren
+## Install / update
 
 ```bash
+git clone https://github.com/dreamfire78/kwin-animated-borders.git
+cd kwin-animated-borders
 ./install.sh
 ```
 
-Nach einem **Update** einmal ab- und wieder anmelden. KWin hält den alten QML-Code bis zum Neustart im Speicher.
+After an **update**, log out and back in once: KWin keeps the old QML code in memory until it restarts.
 
-## Einstellungen
+## Settings
 
-Systemeinstellungen → Fensterverwaltung → KWin-Scripte → „Animierte Fensterränder“ → Zahnrad.
+System Settings → Window Management → KWin Scripts → "Animated Borders" → gear icon.
+The settings dialog is currently in German.
 
-| Einstellung | Bedeutung |
+| Setting (label) | Meaning |
 |---|---|
-| Randstärke | Dicke des Rands in Pixeln |
-| Abstand zum Fenster | Lücke zwischen Fenster und Rand |
-| Eckenradius | Radius der Fensterecken (0 = eckig) |
-| Animation | Rotieren, Rotieren rückwärts, Pulsieren, Statisch |
-| Dauer pro Umlauf | Geschwindigkeit in Millisekunden |
-| Farbe 1–4 | Verlaufsfarben als `#RRGGBB` oder `#AARRGGBB` |
+| Border width (Randstärke) | Thickness of the border in pixels |
+| Gap (Abstand zum Fenster) | Space between window and border |
+| Corner radius (Eckenradius) | Radius of the window corners (0 = square) |
+| Animation | Rotate, rotate reverse, pulse, static |
+| Duration (Dauer pro Umlauf) | Speed in milliseconds per cycle |
+| Colors 1–4 (Farbe 1–4) | Gradient colors as `#RRGGBB` or `#AARRGGBB` |
+| Hide on maximized windows | Hides the border while the active window is maximized |
 
-Gespeicherte Einstellungen wirken nach etwa einer Sekunde. Die Einstellungsseite für KWin-Scripte sagt KWin nicht Bescheid,
-dass sich `kwinrc` geändert hat. Deshalb richtet `install.sh` eine systemd-Path-Unit (`animatedborders-config.path`) ein:
-Sobald sich der Abschnitt `[Script-animatedborders]` ändert, ruft sie `qdbus6 org.kde.KWin /KWin reconfigure` auf.
-Das Script liest seine Einstellungen jede Sekunde neu ein.
+Saved settings take effect after about a second. The settings page for KWin scripts does not tell KWin that
+`kwinrc` changed, so `install.sh` sets up a systemd path unit (`animatedborders-config.path`): whenever the
+`[Script-animatedborders]` section changes, it runs `qdbus6 org.kde.KWin /KWin reconfigure`.
+The script rereads its settings every second.
 
-## Entfernen
+## Uninstall
 
 ```bash
 ./uninstall.sh
 ```
 
-## Funktionsweise
+## How it works
 
-- Vier dünne, für Klicks durchlässige Overlay-Fenster (oben, unten, links, rechts) folgen der Geometrie von `Workspace.activeWindow`.
-- Jedes Fenster zeichnet den ganzen Ring als `Shape` mit `ConicalGradient`, sichtbar ist aber nur sein eigener Ausschnitt.
-  Dadurch muss der Compositor nur die Ränder neu zeichnen, nicht die ganze Fensterfläche.
-- Bei Vollbild, minimierten Fenstern, Panels und dem Desktop wird der Rand ausgeblendet.
+- Four thin, click-through overlay windows (top, bottom, left, right) follow the geometry of the active window.
+- Each window draws the whole ring as a `Shape` with a `ConicalGradient`, but only its own part is visible.
+  That way the compositor only repaints the edges, not the whole area of the window.
+- The border is hidden for fullscreen and minimized windows, panels and the desktop.
+- The border windows are marked to skip Overview, the task switcher and the taskbar.
 
-Eigenheiten von KWin-Scripts:
+Quirks of KWin scripts:
 
-- `visible` wirkt bei Fenstern in einem Script nicht. Nur `show()`/`hide()` funktionieren, und das erst, nachdem das Script geladen ist.
-- Keine QML-Bindings an KWins Fensterobjekte. Beim Beenden baut KWin die Fenster ab und aktiviert dabei synchron das nächste,
-  obwohl das Rendering schon weg ist. Jeder Zugriff oder Größenwechsel der Randfenster in diesem Moment lässt KWin abstürzen.
-  Signale planen deshalb nur `update()` per `Qt.callLater()` ein. Während des Beendens läuft die Ereignisschleife nicht mehr,
-  also passiert dann nichts.
-- QML-Dateien werden pro Pfad zwischengespeichert. Zum Testen deshalb jede Version unter einem neuen Pfad mit
-  `org.kde.kwin.Scripting.loadDeclarativeScript` laden und mit `/Scripting/ScriptN run` starten.
+- `visible` has no effect on windows declared in a script. Only `show()`/`hide()` work, and only after the script has finished loading.
+- No QML bindings to KWin's window objects. On shutdown, KWin destroys windows and synchronously activates the next one,
+  while its renderer is already gone. Touching windows or resizing the border windows at that point crashes KWin.
+  Signals therefore only schedule `update()` via `Qt.callLater()`. During shutdown the event loop no longer runs,
+  so nothing happens.
+- QML files are cached per path. For testing, load each version from a new path with
+  `org.kde.kwin.Scripting.loadDeclarativeScript` and start it with `/Scripting/ScriptN run`.
 
-## Grenzen
+## Limitations
 
-- Der Rand liegt über allen Fenstern. Ein Menü oder Popup, das über die Fensterkante hinausragt, kann ihn überdecken bzw. von ihm überdeckt werden.
-- Die Animation sorgt dafür, dass der Compositor dauerhaft neu zeichnet. Wer Akku sparen will, wählt „Statisch“.
+- The border sits above all windows. A menu or popup that extends past the window edge can overlap it or be overlapped by it.
+- The animation keeps the compositor repainting constantly. To save battery, choose "Statisch" (static).
+
+## License
+
+GPL-3.0-or-later, see [LICENSE](LICENSE).
