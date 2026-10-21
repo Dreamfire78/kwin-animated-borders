@@ -10,3 +10,4 @@ systemctl --user disable --now animatedborders-config.path
 rm -f ~/.config/systemd/user/animatedborders-config.{path,service}
 systemctl --user daemon-reload
 rm -rf ~/.local/share/animatedborders ~/.cache/animatedborders-config
+rm -f ~/.local/share/locale/*/LC_MESSAGES/kwin_script_animatedborders.mo

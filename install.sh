@@ -11,6 +11,14 @@ else
     kpackagetool6 --type=KWin/Script --install package
 fi
 
+# Translations of the settings dialog, one catalog per po/<lang>.po.
+for po in po/*.po; do
+    lang=$(basename "$po" .po)
+    dir=~/.local/share/locale/$lang/LC_MESSAGES
+    mkdir -p "$dir"
+    python3 po/compile_mo.py "$po" "$dir/kwin_script_animatedborders.mo"
+done
+
 # Applies changed settings right away instead of after the next login.
 install -Dm755 apply-config.sh ~/.local/share/animatedborders/apply-config.sh
 install -Dm644 -t ~/.config/systemd/user systemd/animatedborders-config.path systemd/animatedborders-config.service

@@ -1,0 +1,54 @@
+# German translation of the Animated Borders settings dialog.
+msgid ""
+msgstr ""
+"Project-Id-Version: kwin-animated-borders\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Border width (px):"
+msgstr "Randstärke (px):"
+
+msgid "Gap to window (px):"
+msgstr "Abstand zum Fenster (px):"
+
+msgid "Corner radius (px):"
+msgstr "Eckenradius (px):"
+
+msgid "Animation:"
+msgstr "Animation:"
+
+msgid "Rotate"
+msgstr "Rotieren"
+
+msgid "Rotate (reverse)"
+msgstr "Rotieren (rückwärts)"
+
+msgid "Pulse"
+msgstr "Pulsieren"
+
+msgid "Static"
+msgstr "Statisch"
+
+msgid "Duration per cycle (ms):"
+msgstr "Dauer pro Umlauf (ms):"
+
+msgid "Color 1:"
+msgstr "Farbe 1:"
+
+msgid "Color 2:"
+msgstr "Farbe 2:"
+
+msgid "Color 3:"
+msgstr "Farbe 3:"
+
+msgid "Color 4:"
+msgstr "Farbe 4:"
+
+msgid "Hide on maximized windows"
+msgstr "Bei maximierten Fenstern ausblenden"
+
+msgid "Colors as #RRGGBB or #AARRGGBB. Changes take effect about a second after saving."
+msgstr "Farben als #RRGGBB oder #AARRGGBB. Änderungen wirken etwa eine Sekunde nach dem Speichern."

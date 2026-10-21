@@ -19,5 +19,6 @@
     },
     "X-KDE-ConfigModule": "kwin/effects/configs/kcm_kwin4_genericscripted",
     "X-Plasma-API": "declarativescript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-KWin-Config-TranslationDomain": "kwin_script_animatedborders"
 }

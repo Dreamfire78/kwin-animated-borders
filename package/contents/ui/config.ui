@@ -6,7 +6,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label_thickness">
      <property name="text">
-      <string>Randstärke (px):</string>
+      <string>Border width (px):</string>
      </property>
     </widget>
    </item>
@@ -23,7 +23,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="label_offset">
      <property name="text">
-      <string>Abstand zum Fenster (px):</string>
+      <string>Gap to window (px):</string>
      </property>
     </widget>
    </item>
@@ -37,7 +37,7 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_radius">
      <property name="text">
-      <string>Eckenradius (px):</string>
+      <string>Corner radius (px):</string>
      </property>
     </widget>
    </item>
@@ -59,22 +59,22 @@
     <widget class="QComboBox" name="kcfg_animation">
      <item>
       <property name="text">
-       <string>Rotieren</string>
+       <string>Rotate</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Rotieren (rückwärts)</string>
+       <string>Rotate (reverse)</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Pulsieren</string>
+       <string>Pulse</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Statisch</string>
+       <string>Static</string>
       </property>
      </item>
     </widget>
@@ -82,7 +82,7 @@
    <item row="4" column="0">
     <widget class="QLabel" name="label_duration">
      <property name="text">
-      <string>Dauer pro Umlauf (ms):</string>
+      <string>Duration per cycle (ms):</string>
      </property>
     </widget>
    </item>
@@ -102,70 +102,70 @@
    <item row="5" column="0">
     <widget class="QLabel" name="label_color1">
      <property name="text">
-      <string>Farbe 1:</string>
+      <string>Color 1:</string>
      </property>
     </widget>
    </item>
    <item row="5" column="1">
     <widget class="QLineEdit" name="kcfg_color1">
      <property name="placeholderText">
-      <string>#ff0080</string>
+      <string notr="true">#ff0080</string>
      </property>
     </widget>
    </item>
    <item row="6" column="0">
     <widget class="QLabel" name="label_color2">
      <property name="text">
-      <string>Farbe 2:</string>
+      <string>Color 2:</string>
      </property>
     </widget>
    </item>
    <item row="6" column="1">
     <widget class="QLineEdit" name="kcfg_color2">
      <property name="placeholderText">
-      <string>#ff8c00</string>
+      <string notr="true">#ff8c00</string>
      </property>
     </widget>
    </item>
    <item row="7" column="0">
     <widget class="QLabel" name="label_color3">
      <property name="text">
-      <string>Farbe 3:</string>
+      <string>Color 3:</string>
      </property>
     </widget>
    </item>
    <item row="7" column="1">
     <widget class="QLineEdit" name="kcfg_color3">
      <property name="placeholderText">
-      <string>#00e5ff</string>
+      <string notr="true">#00e5ff</string>
      </property>
     </widget>
    </item>
    <item row="8" column="0">
     <widget class="QLabel" name="label_color4">
      <property name="text">
-      <string>Farbe 4:</string>
+      <string>Color 4:</string>
      </property>
     </widget>
    </item>
    <item row="8" column="1">
     <widget class="QLineEdit" name="kcfg_color4">
      <property name="placeholderText">
-      <string>#7c4dff</string>
+      <string notr="true">#7c4dff</string>
      </property>
     </widget>
    </item>
    <item row="9" column="1">
     <widget class="QCheckBox" name="kcfg_hideOnMaximized">
      <property name="text">
-      <string>Bei maximierten Fenstern ausblenden</string>
+      <string>Hide on maximized windows</string>
      </property>
     </widget>
    </item>
    <item row="10" column="0" colspan="2">
     <widget class="QLabel" name="label_hint">
      <property name="text">
-      <string>Farben als #RRGGBB oder #AARRGGBB. Änderungen wirken etwa eine Sekunde nach dem Speichern.</string>
+      <string>Colors as #RRGGBB or #AARRGGBB. Changes take effect about a second after saving.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
