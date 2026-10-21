@@ -1,0 +1,6 @@
+[Unit]
+Description=Apply Animated Borders settings
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/share/animatedborders/apply-config.sh

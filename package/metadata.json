@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "KWin/Script",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "peet"
+            }
+        ],
+        "Category": "Appearance",
+        "Description": "Animated gradient border around the active window, inspired by tacky-borders",
+        "Description[de]": "Animierter Farbverlauf-Rand um das aktive Fenster, inspiriert von tacky-borders",
+        "EnabledByDefault": false,
+        "Icon": "preferences-desktop-color",
+        "Id": "animatedborders",
+        "License": "GPL-3.0-or-later",
+        "Name": "Animated Borders",
+        "Name[de]": "Animierte Fensterränder",
+        "Version": "1.0"
+    },
+    "X-KDE-ConfigModule": "kwin/effects/configs/kcm_kwin4_genericscripted",
+    "X-Plasma-API": "declarativescript",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

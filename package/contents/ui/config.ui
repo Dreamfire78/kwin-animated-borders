@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AnimatedBordersConfig</class>
+ <widget class="QWidget" name="AnimatedBordersConfig">
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_thickness">
+     <property name="text">
+      <string>Randstärke (px):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QSpinBox" name="kcfg_thickness">
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>50</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_offset">
+     <property name="text">
+      <string>Abstand zum Fenster (px):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QSpinBox" name="kcfg_offset">
+     <property name="maximum">
+      <number>50</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_radius">
+     <property name="text">
+      <string>Eckenradius (px):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QSpinBox" name="kcfg_radius">
+     <property name="maximum">
+      <number>50</number>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_animation">
+     <property name="text">
+      <string>Animation:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QComboBox" name="kcfg_animation">
+     <item>
+      <property name="text">
+       <string>Rotieren</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Rotieren (rückwärts)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Pulsieren</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Statisch</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_duration">
+     <property name="text">
+      <string>Dauer pro Umlauf (ms):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QSpinBox" name="kcfg_duration">
+     <property name="minimum">
+      <number>200</number>
+     </property>
+     <property name="maximum">
+      <number>60000</number>
+     </property>
+     <property name="singleStep">
+      <number>250</number>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_color1">
+     <property name="text">
+      <string>Farbe 1:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QLineEdit" name="kcfg_color1">
+     <property name="placeholderText">
+      <string>#ff0080</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_color2">
+     <property name="text">
+      <string>Farbe 2:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLineEdit" name="kcfg_color2">
+     <property name="placeholderText">
+      <string>#ff8c00</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_color3">
+     <property name="text">
+      <string>Farbe 3:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QLineEdit" name="kcfg_color3">
+     <property name="placeholderText">
+      <string>#00e5ff</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_color4">
+     <property name="text">
+      <string>Farbe 4:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QLineEdit" name="kcfg_color4">
+     <property name="placeholderText">
+      <string>#7c4dff</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QCheckBox" name="kcfg_hideOnMaximized">
+     <property name="text">
+      <string>Bei maximierten Fenstern ausblenden</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0" colspan="2">
+    <widget class="QLabel" name="label_hint">
+     <property name="text">
+      <string>Farben als #RRGGBB oder #AARRGGBB. Änderungen wirken etwa eine Sekunde nach dem Speichern.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

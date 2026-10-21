@@ -1,0 +1,8 @@
+[Unit]
+Description=Watch kwinrc for Animated Borders settings
+
+[Path]
+PathChanged=%h/.config/kwinrc
+
+[Install]
+WantedBy=default.target

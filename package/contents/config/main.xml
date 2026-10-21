@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+    <kcfgfile name=""/>
+    <group name="">
+        <entry name="thickness" type="Int">
+            <default>4</default>
+        </entry>
+        <entry name="offset" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="radius" type="Int">
+            <default>8</default>
+        </entry>
+        <!-- 0 = rotate, 1 = rotate reverse, 2 = pulse, 3 = static -->
+        <entry name="animation" type="Int">
+            <default>0</default>
+        </entry>
+        <!-- milliseconds per rotation / pulse cycle -->
+        <entry name="duration" type="Int">
+            <default>3000</default>
+        </entry>
+        <entry name="color1" type="String">
+            <default>#ff0080</default>
+        </entry>
+        <entry name="color2" type="String">
+            <default>#ff8c00</default>
+        </entry>
+        <entry name="color3" type="String">
+            <default>#00e5ff</default>
+        </entry>
+        <entry name="color4" type="String">
+            <default>#7c4dff</default>
+        </entry>
+        <entry name="hideOnMaximized" type="Bool">
+            <default>false</default>
+        </entry>
+    </group>
+</kcfg>
