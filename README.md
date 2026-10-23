@@ -57,6 +57,9 @@ To add a language: copy `po/de.po` to `po/<lang>.po`, translate the `msgstr` lin
   That way the compositor only repaints the edges, not the whole area of the window.
 - The border is hidden for fullscreen and minimized windows, panels and the desktop.
 - The border windows are marked to skip Overview, the task switcher and the taskbar.
+- The border windows sit above all other windows. Wherever a window stacked above the active one
+  (menu, tooltip, notification, panel, keep-above window) overlaps the border, that area is cut out
+  with a `MultiEffect` mask, so it looks as if the border lies beneath it.
 
 Quirks of KWin scripts:
 
@@ -70,7 +73,6 @@ Quirks of KWin scripts:
 
 ## Limitations
 
-- The border sits above all windows. A menu or popup that extends past the window edge can overlap it or be overlapped by it.
 - The animation keeps the compositor repainting constantly. To save battery, choose "Static".
 
 ## License

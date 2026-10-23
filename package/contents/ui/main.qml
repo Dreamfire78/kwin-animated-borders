@@ -37,6 +37,9 @@ Item {
 
     Component.onCompleted: {
         loadConfig();
+        for (const w of Workspace.stackingOrder) {
+            watchGeometry(w);
+        }
         track(Workspace.activeWindow);
     }
 
@@ -74,6 +77,10 @@ Item {
     property bool active: false
     // Ring geometry in global (logical) coordinates.
     property rect ring: Qt.rect(0, 0, 0, 0)
+    // Geometries of windows stacked above the active one (menus, tooltips,
+    // notifications, panels, keep-above windows). The border itself is drawn
+    // above everything, so the strips cut these areas out.
+    property var obstacles: []
 
     function isCandidate(w) {
         if (!w || w.deleted || w.minimized || w.fullScreen || w.hidden) {
@@ -94,12 +101,42 @@ Item {
         return true;
     }
 
+    function isOnCurrentDesktop(w) {
+        const desktops = w.desktops;
+        if (w.onAllDesktops || desktops.length === 0) { // popups have no desktop
+            return true;
+        }
+        // Desktops arrive as fresh wrappers, so compare ids instead of objects.
+        const current = Workspace.currentDesktop.id;
+        for (let i = 0; i < desktops.length; i++) {
+            if (desktops[i].id === current) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function isVisibleHere(w) {
+        return !w.minimized && !w.hidden && !w.deleted && w.caption !== stripTitle
+            && isOnCurrentDesktop(w);
+    }
+
+    function windowsAbove(w) {
+        const order = Workspace.stackingOrder;
+        const index = order.indexOf(w);
+        return index < 0 ? [] : order.slice(index + 1).filter(isVisibleHere);
+    }
+
     function update() {
         const w = tracked.window;
         if (!isCandidate(w)) {
             active = false;
             return;
         }
+        obstacles = windowsAbove(w).map(o => {
+            const g = o.frameGeometry;
+            return Qt.rect(g.x, g.y, g.width, g.height);
+        });
         const g = w.frameGeometry;
         const grow = offset + thickness;
         ring = Qt.rect(g.x - grow, g.y - grow, g.width + 2 * grow, g.height + 2 * grow);
@@ -110,6 +147,13 @@ Item {
         Qt.callLater(update);
     }
 
+    // Any window moving may start or stop covering the border.
+    function watchGeometry(w) {
+        if (w.caption !== stripTitle) {
+            w.frameGeometryChanged.connect(scheduleUpdate);
+        }
+    }
+
     function track(w) {
         const old = tracked.window;
         if (old === w) {
@@ -117,7 +161,6 @@ Item {
         }
         if (old) {
             try {
-                old.frameGeometryChanged.disconnect(scheduleUpdate);
                 old.fullScreenChanged.disconnect(scheduleUpdate);
                 old.minimizedChanged.disconnect(scheduleUpdate);
             } catch (e) {
@@ -126,7 +169,6 @@ Item {
         }
         tracked.window = w;
         if (w) {
-            w.frameGeometryChanged.connect(scheduleUpdate);
             w.fullScreenChanged.connect(scheduleUpdate);
             w.minimizedChanged.connect(scheduleUpdate);
             fadeIn.restart();
@@ -139,11 +181,21 @@ Item {
         function onWindowActivated(w) {
             root.track(w);
         }
+        function onWindowAdded(w) {
+            root.hideFromSwitchers(w);
+            root.watchGeometry(w);
+        }
         function onWindowRemoved(w) {
             if (w === root.tracked.window) {
                 root.tracked.window = null;
-                root.scheduleUpdate();
             }
+            root.scheduleUpdate();
+        }
+        function onStackingOrderChanged() {
+            root.scheduleUpdate();
+        }
+        function onCurrentDesktopChanged() {
+            root.scheduleUpdate();
         }
     }
 
@@ -205,13 +257,6 @@ Item {
             w.skipPager = true;
             w.skipSwitcher = true;
             w.skipTaskbar = true;
-        }
-    }
-
-    Connections {
-        target: Workspace
-        function onWindowAdded(w) {
-            root.hideFromSwitchers(w);
         }
     }
 
