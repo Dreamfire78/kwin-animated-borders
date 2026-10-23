@@ -184,6 +184,7 @@ Item {
         function onWindowAdded(w) {
             root.hideFromSwitchers(w);
             root.watchGeometry(w);
+            root.scheduleUpdate(); // e.g. a menu opening above the active window
         }
         function onWindowRemoved(w) {
             if (w === root.tracked.window) {
