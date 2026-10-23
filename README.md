@@ -7,7 +7,7 @@ Nothing to compile, and it survives Plasma updates.
 ## Install / update
 
 ```bash
-git clone https://github.com/dreamfire78/kwin-animated-borders.git
+git clone https://github.com/Dreamfire78/kwin-animated-borders.git
 cd kwin-animated-borders
 ./install.sh
 ```
