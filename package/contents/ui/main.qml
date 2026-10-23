@@ -147,10 +147,13 @@ Item {
         Qt.callLater(update);
     }
 
-    // Any window moving may start or stop covering the border.
+    // Any window moving or being raised may start or stop covering the border.
     function watchGeometry(w) {
         if (w.caption !== stripTitle) {
             w.frameGeometryChanged.connect(scheduleUpdate);
+            if (w.stackingOrderChanged) {
+                w.stackingOrderChanged.connect(scheduleUpdate);
+            }
         }
     }
 
@@ -174,6 +177,14 @@ Item {
             fadeIn.restart();
         }
         scheduleUpdate();
+        // KWin may raise the window only after activating it.
+        raiseCheck.restart();
+    }
+
+    Timer {
+        id: raiseCheck
+        interval: 100
+        onTriggered: root.update()
     }
 
     Connections {
